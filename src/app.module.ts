@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { AccidentsModule } from './accidents/accidents.module'
+import { ViewController } from './view.controller'
 
 @Module({
   imports: [
@@ -15,6 +16,9 @@ import { AccidentsModule } from './accidents/accidents.module'
       autoLoadEntities: true,
       logging: true
     })
+  ],
+  controllers: [
+    ViewController
   ]
 })
 export class AppModule {}

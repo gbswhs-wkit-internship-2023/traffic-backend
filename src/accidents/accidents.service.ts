@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { Repository } from 'typeorm'
+import { MoreThan, Repository } from 'typeorm'
 import { CreateAccidentDto } from './dto/create-accident.dto'
 import { Accident, AccidentType } from './entities/accident.entity'
 
@@ -29,7 +29,32 @@ export class AccidentsService {
       order: {
         createdAt: 'DESC'
       },
-      take: 30
+      take: 10
     })
+  }
+
+  public async getStatics (): Promise<{ traffic: number, tail: number, total: number }> {
+    const oneHourAgo = new Date()
+    oneHourAgo.setHours(oneHourAgo.getHours() - 1)
+
+    const traffic = await this.accidents.count({
+      where: {
+        type: AccidentType.TRAFFIC_VIOLATION,
+        createdAt: MoreThan(oneHourAgo)
+      }
+    })
+
+    const tail = await this.accidents.count({
+      where: {
+        type: AccidentType.TAIL_TRACKING,
+        createdAt: MoreThan(oneHourAgo)
+      }
+    })
+
+    return {
+      traffic,
+      tail,
+      total: traffic + tail
+    }
   }
 }

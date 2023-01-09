@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>traffic</title>
+  </head>
+  <body>
+    <img src="https://cdn.discordapp.com/attachments/837242003862716436/1061886079285866596/index.png" width="700">
+
+    <div style="display: flex;">
+      <table style="border-collapse: collapse;" border="3">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>차량번호</th>
+            <th>위반종류</th>
+            <th>위반시각</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each accidents}}
+            <tr>
+              <td>{{this.id}}</td>
+              <td>{{this.carNumber}}</td>
+              <td>{{this.type}}</td>
+              <td>{{this.createdAt}}</td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+
+      <div style="border: black solid 2px; width: 300px">
+        <h3>현재 차량 수: 0대</h3>
+        <h3>신호: 빨간불</h3>
+        <hr>
+        <p>1시간 기준</p>
+        <h3>신호위반 수: {{statics.traffic}}대</h3>
+        <h3>꼬리물기 수: {{statics.tail}}대</h3>
+        <h3>합: {{statics.total}}대</h3>
+      </div>
+    </div>
+
+    <script>
+      setTimeout(() => {
+        window.location.reload()
+      }, 1000)
+    </script>
+
+    <style>
+      html, body, h1, h2, h3, h4, h5, h6, p {
+        padding: 0;
+        margin: 0;
+      }
+    </style>
+  </body>
+</html>

@@ -6,6 +6,6 @@ export class CreateAccidentDto {
   public readonly carnum: string
 
   @IsString()
-  @IsIn(['TRAFFIC_VIOLATION', 'TAIL_TRAKING'])
+  @IsIn(['TRAFFIC_VIOLATION', 'TAIL_TRACKING'])
   public readonly type: keyof typeof AccidentType
 }
