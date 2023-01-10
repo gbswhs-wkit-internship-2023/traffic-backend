@@ -19,7 +19,6 @@ export class AccidentsService {
     }
 
     await this.accidents.insert({
-      carNumber: createAccidentDto.carnum,
       type
     })
   }

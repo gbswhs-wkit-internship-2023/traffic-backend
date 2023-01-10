@@ -16,9 +16,8 @@ export class ViewController {
 
     return {
       accidents: accidents.map((v) => ({
-        ...v,
         type: ['신호위반', '꼬리물기'][v.type],
-        createdAt: moment(v.createdAt).format('YYYY-MM-DD hh:mm A')
+        createdAt: moment(v.createdAt).format('YYYY-MM-DD HH:mm')
       })),
       statics
     }

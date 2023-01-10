@@ -18,15 +18,6 @@ export class Accident {
   public readonly id: number
 
   @Column({
-    name: 'accidents_carnum',
-    type: 'varchar',
-    length: 20,
-    nullable: false,
-    charset: 'utf8mb4'
-  })
-  public readonly carNumber: string
-
-  @Column({
     name: 'accidents_type',
     type: 'int',
     unsigned: true,
