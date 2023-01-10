@@ -1,18 +1,25 @@
-import { Controller, Get, Post, Body } from '@nestjs/common'
+import { Controller, Get, Post, Body, Sse } from '@nestjs/common'
+import { Observable } from 'rxjs'
 import { PResData } from '../common/ResponseData'
 import { AccidentsService } from './accidents.service'
+import { AccidentsEventData, AccidentsEventService } from './accidentsEvent.service'
 import { CreateAccidentDto } from './dto/create-accident.dto'
 import { Accident } from './entities/accident.entity'
 
 @Controller('accidents')
 export class AccidentsController {
   constructor (
-    private readonly accidentsService: AccidentsService
+    private readonly accidentsService: AccidentsService,
+    private readonly accidentsEventService: AccidentsEventService
   ) {}
 
   @Post()
   public async create (@Body() createAccidentDto: CreateAccidentDto): PResData {
     await this.accidentsService.create(createAccidentDto)
+
+    this.accidentsEventService.emitEvent({
+      data: { requireRefresh: true }
+    })
 
     return {
       success: true
@@ -29,5 +36,10 @@ export class AccidentsController {
       },
       success: true
     }
+  }
+
+  @Sse('@event')
+  public attachAccidentEvent (): Observable<AccidentsEventData> {
+    return this.accidentsEventService.createObserver()
   }
 }

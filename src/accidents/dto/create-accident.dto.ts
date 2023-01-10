@@ -1,8 +1,12 @@
-import { IsIn, IsString } from 'class-validator'
-import { AccidentType } from '../entities/accident.entity'
+import { IsInt, IsNumber, IsPositive, IsString, MaxLength } from 'class-validator'
 
 export class CreateAccidentDto {
+  @IsNumber()
+  @IsInt()
+  @IsPositive()
+  public readonly vehicleId: number
+
   @IsString()
-  @IsIn(['TRAFFIC_VIOLATION', 'TAIL_TRACKING'])
-  public readonly type: keyof typeof AccidentType
+  @MaxLength(10)
+  public readonly accidentTypeLabel: string
 }
