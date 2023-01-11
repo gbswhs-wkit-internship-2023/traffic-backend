@@ -18,4 +18,11 @@ export class Vehicle {
     default: () => 'CURRENT_TIMESTAMP'
   })
   public readonly createdAt: Date
+
+  @Column({
+    name: 'vehicles_picture',
+    type: 'longtext',
+    nullable: false
+  })
+  public readonly picture: string
 }

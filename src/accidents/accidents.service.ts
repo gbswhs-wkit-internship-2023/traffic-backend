@@ -30,7 +30,8 @@ export class AccidentsService {
 
     if (!isVehicleRegisted) {
       await this.vehicles.insert({
-        id: createAccidentDto.vehicleId
+        id: createAccidentDto.vehicleId,
+        picture: 'data:image/jpeg;base64,' + createAccidentDto.vehiclePicture
       })
     }
 

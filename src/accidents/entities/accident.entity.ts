@@ -1,6 +1,7 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
 import { AccidentType } from './accidtype.entity'
 import { Statistic } from './statistic.entity'
+import { Vehicle } from './vehicle.entity'
 
 @Entity({
   name: 'accidents'
@@ -20,6 +21,13 @@ export class Accident {
     nullable: false
   })
   public readonly vehicleId: number
+
+  @ManyToOne(() => Vehicle, { eager: true })
+  @JoinColumn({
+    name: 'vehicle_id',
+    referencedColumnName: 'id'
+  })
+  public readonly vehicle: Vehicle
 
   @Column({
     name: 'accidtypes_id',

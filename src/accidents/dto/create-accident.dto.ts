@@ -1,4 +1,4 @@
-import { IsInt, IsNumber, IsPositive, IsString, MaxLength } from 'class-validator'
+import { IsBase64, IsInt, IsNumber, IsPositive, IsString, MaxLength } from 'class-validator'
 
 export class CreateAccidentDto {
   @IsNumber()
@@ -9,4 +9,8 @@ export class CreateAccidentDto {
   @IsString()
   @MaxLength(10)
   public readonly accidentTypeLabel: string
+
+  @IsString()
+  @IsBase64()
+  public readonly vehiclePicture: string
 }
