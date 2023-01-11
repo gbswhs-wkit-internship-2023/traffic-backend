@@ -37,7 +37,7 @@
         <hr>
         <p>1시간 기준</p>
         {{#each statics}}
-        
+
           <h3>{{@key}}: {{this}}대</h3>
         {{/each}}
       </div>
@@ -51,6 +51,17 @@
         
         if (requireRefresh) {
           accidentsEvent.close()
+          window.location.reload()
+        }
+      })
+
+      const statusEvent = new EventSource('/status/@event')
+
+      statusEvent.addEventListener('message', ({ data }) => {
+        const { requireRefresh } = JSON.parse(data)
+        
+        if (requireRefresh) {
+          statusEvent.close()
           window.location.reload()
         }
       })

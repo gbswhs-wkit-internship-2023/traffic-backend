@@ -19,8 +19,19 @@ export class StatusService {
     }
   }
 
-  public async updateStatus (newStatus: StatusDto): Promise<void> {
+  public async updateStatus (newStatus: StatusDto): Promise<boolean> {
+    const oldStatus = await this.getStatus()
+    const isChanged =
+      oldStatus.trafficLight !== newStatus.trafficLight ||
+      oldStatus.vehicleCount !== newStatus.vehicleCount
+
+    if (!isChanged) {
+      return false
+    }
+
     await this.cacheManager.set('vehicleCount', newStatus.vehicleCount)
     await this.cacheManager.set('trafficLight', newStatus.trafficLight)
+
+    return true
   }
 }
