@@ -24,7 +24,7 @@ export class Accident {
 
   @ManyToOne(() => Vehicle, { eager: true })
   @JoinColumn({
-    name: 'vehicle_id',
+    name: 'vehicles_id',
     referencedColumnName: 'id'
   })
   public readonly vehicle: Vehicle
