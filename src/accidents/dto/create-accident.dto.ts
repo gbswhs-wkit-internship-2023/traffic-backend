@@ -13,4 +13,8 @@ export class CreateAccidentDto {
   @IsString()
   @IsBase64()
   public readonly vehiclePicture: string
+
+  @IsString()
+  @IsBase64()
+  public readonly vehicleFullPicture: string
 }

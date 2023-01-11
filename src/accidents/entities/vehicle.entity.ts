@@ -25,4 +25,11 @@ export class Vehicle {
     nullable: false
   })
   public readonly picture: string
+
+  @Column({
+    name: 'vehicles_fullpicture',
+    type: 'longtext',
+    nullable: false
+  })
+  public readonly fullPicture: string
 }
