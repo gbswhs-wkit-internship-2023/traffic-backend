@@ -2,7 +2,7 @@ import { ValidationPipe } from '@nestjs/common'
 import { NestFactory } from '@nestjs/core'
 import { AppModule } from './app.module'
 import { NestExpressApplication } from '@nestjs/platform-express'
-import express from 'express'
+import * as express from 'express'
 import { join } from 'path'
 
 async function boot (): Promise<void> {
