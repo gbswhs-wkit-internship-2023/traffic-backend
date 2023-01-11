@@ -27,12 +27,14 @@ export class AccidentsController {
   }
 
   @Get()
-  public async findAll (): PResData<{ accidents: Accident[] }> {
+  public async findAll (): PResData<{ accidents: Accident[], statics: Record<string, number> }> {
     const accidents = await this.accidentsService.findAll()
+    const statics = await this.accidentsService.getStatics()
 
     return {
       data: {
-        accidents
+        accidents,
+        statics
       },
       success: true
     }

@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { AccidentsModule } from './accidents/accidents.module'
-import { ViewController } from './view.controller'
 import { StatusModule } from './status/status.module'
 
 @Module({
@@ -18,9 +17,6 @@ import { StatusModule } from './status/status.module'
       logging: true
     }),
     StatusModule
-  ],
-  controllers: [
-    ViewController
   ]
 })
 export class AppModule {}
