@@ -5,6 +5,7 @@ import { AccidentsService } from './accidents.service'
 import { AccidentsEventData, AccidentsEventService } from './accidentsEvent.service'
 import { CreateAccidentDto } from './dto/create-accident.dto'
 import { Accident } from './entities/accident.entity'
+import { Statistic } from './entities/statistic.entity'
 
 @Controller('accidents')
 export class AccidentsController {
@@ -27,14 +28,16 @@ export class AccidentsController {
   }
 
   @Get()
-  public async findAll (): PResData<{ accidents: Accident[], statics: Record<string, number> }> {
+  public async findAll (): PResData<{ accidents: Accident[], statics: Record<string, number>, history: Statistic[] }> {
     const accidents = await this.accidentsService.findAll()
     const statics = await this.accidentsService.getStatics()
+    const history = await this.accidentsService.getStaticsHistory()
 
     return {
       data: {
         accidents,
-        statics
+        statics,
+        history
       },
       success: true
     }

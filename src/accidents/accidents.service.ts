@@ -97,7 +97,7 @@ export class AccidentsService {
       order: {
         createdAt: 'DESC'
       },
-      take: 10
+      take: 15
     })
   }
 
@@ -119,5 +119,13 @@ export class AccidentsService {
         .reduce((a, b) => a + b, 0)
 
     return resultObj
+  }
+
+  public async getStaticsHistory (): Promise<Statistic[]> {
+    return await this.statics.find({
+      where:
+        new Array(10).fill(1).map((_, i) =>
+          ({ createdAt: moment().subtract(i, 'hours').format('YYYYMMDDHH') }))
+    })
   }
 }
